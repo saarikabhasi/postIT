@@ -21,7 +21,7 @@ There are two types of users: **Customer and Technician**.
 7. Auto delete ads/jobs which has an appointment scheduled and is 7 days older than current date.
 
 
-# Distinctiveness and complexities
+## Distinctiveness and complexities
 1. Only verified user can use this application. 
     * Email verification is required for any user to use this web application
 2. User can login with username/email
@@ -90,7 +90,7 @@ There are two types of users: **Customer and Technician**.
    For more information - https://developers.google.com/maps/documentation/javascript/places-autocomplete
   
 
-### Author:
+# Author:
 ------------
 NAIR SAARIKA BHASI
          
