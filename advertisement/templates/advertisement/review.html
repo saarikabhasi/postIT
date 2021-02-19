@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Review
+{% endblock %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+<script type ="text/javascript" src="{% static 'util.js' %}"></script>
+<script type ="text/javascript" src="{% static 'function.js' %}"></script>
+
+
+{%endblock%}
+{% block body %}
+    
+<div class="container">
+    <div class="row">
+       
+        <main class="col-md-9  col-lg-10 px-md-4 ">
+            <form action="{% url 'advertisement:review' id=id  %}" method="POST" id="review" >
+                {% csrf_token %}          
+                
+                {{reviewform|crispy}}
+                
+                <div class="container ">
+                    <div class="row">
+                        <div class="col-md-8"> 
+                            <fieldset form="review" class="rating">
+                                
+                                <input type="radio" id="5star" name="rating" value="5" /><label class = "full" for="5star" ></label>
+                                <input type="radio" id="4halfstar" name="rating" value="4.5" /><label class="half" for="4halfstar" ></label>
+                                <input type="radio" id="4star" name="rating" value="4" /><label class = "full" for="4star" ></label>
+                                <input type="radio" id="3halfstar" name="rating" value="3.5" /><label class="half" for="3halfstar" ></label>
+                                <input type="radio" id="3star" name="rating" value="3" /><label class = "full" for="3star" ></label>
+                                <input type="radio" id="2halfstar" name="rating" value="2.5" /><label class="half" for="2halfstar"></label>
+                                <input type="radio" id="2star" name="rating" value="2" /><label class = "full" for="2star" ></label>
+                                <input type="radio" id="1halfstar" name="rating" value="1.5" /><label class="half" for="1halfstar" ></label>
+                                <input type="radio" id="1star" name="rating" value="1" /><label class = "full" for="1star" ></label>
+
+                            
+                            </fieldset>
+                            <div class="" id="submit"  > 
+                                <button id="application-button" class="btn btn-primary ml-5 " form="review" >save</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </form> 
+          
+ 
+            
+            
+           
+            
+        </main>
+    </div>
+</div>
+{%endblock%}

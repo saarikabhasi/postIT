@@ -1,0 +1,606 @@
+body{
+    background-color: #222629 !important;
+}
+.active{
+    color:#89532f;
+}
+.navbar-toggler-icon{
+color:  whitesmoke !important;
+}
+#footer small{
+    position: sticky;
+    left:40%;
+    right:0;
+    bottom: 0;
+    
+
+
+}
+#footer{
+    position: relative;
+    margin-top:35% !important;
+    color: #86C232;
+   
+}
+.flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    background-color: none;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 80%;
+   
+    
+}
+a.nav-link{
+    font-size: 1.2rem;
+}
+#notification .badge,#discussion .badge {
+
+    top: -10px;
+    right: 15px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background-color: transparent;
+    color: red;
+  }
+#logo {
+    /* box-shadow:  3px 3px 3px 3px rgba(149, 41, 41, 0.1); */
+}
+nav#main-nav{
+    background-color:#222629 ;
+}
+nav#main-nav a {
+    color: #86C232;
+    font-size: 1.2rem;
+}
+div#signIn{
+    /* left: 30%; */
+   
+    left: 20%;
+    /* float: center; */
+    /* width:40%; */
+    width:60%;
+    height: 100%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    clear: both;
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    background-color: #3d3d3d;
+}
+div#signIn .lead{
+    font-size: 1rem;
+}
+.card-title a#logo{
+    left: 35%;
+    position: relative;
+    font-size: 2.4rem;
+    color:#86C232;
+
+}
+
+#signIn h2{
+    color: rgb(255, 254, 254);
+    font-size: 1rem;
+} 
+
+#signIn h3{
+    color: rgb(255, 254, 254);
+    font-size: 0.9rem;
+}
+
+#signIn input{
+    color:#080808;
+    font-size: 1rem;
+    height: 1.9rem;
+    background-color: rgb(248, 248, 248);
+}
+#signIn a.btn-link{ 
+    font-size: 1rem;
+    color:rgb(47, 172, 255);
+    text-decoration: none;
+    
+}
+#signIn .role label{
+    font-size: 0.9rem;
+    color: rgb(255, 254, 254);
+    
+}
+#validators {
+
+}
+#validators > p{
+    font-size: 0.8rem;
+}
+.sidebar{
+    /* position: fixed; */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 2rem 2rem 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    
+}
+.sidenav:after{
+    
+}
+#mini-nav {
+    background-color: #FFF1E6;
+}
+#mini-nav a{
+    font-size: 1rem;
+}
+.left{
+    flex:30%;
+    padding: 15px 0;
+}
+ .right{
+    flex:70%;
+    padding: 15px;
+}
+/* .sidenav#button {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+  } */
+  .main {
+    margin-left: 10rem; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+  }
+a#header{
+    text-align: left;
+    margin-left: 0px;
+}
+div#Account,div#Profile{
+    margin-left: 20px;
+}
+#profile-account{
+    color:whitesmoke;
+}
+#profile-account h1{
+font-size: 1.9rem;
+margin-bottom:2rem;
+
+
+}
+#button{
+    font-size: 1rem;
+    color:#092834;
+    /* background-color: rgb(243, 243, 243); */
+    text-decoration: none;
+    border: none;   
+    display: flex;
+    flex-wrap:wrap;
+    flex-direction: column;
+    justify-content:space-evenly;
+    align-items: baseline;
+   
+}
+#button:hover{
+    color: green;
+
+    text-decoration: none;
+}
+.container-fluid nav{
+    background-color: none !important;
+}
+#Profile p,#Account p{
+    font-size: 1.2rem;
+
+}
+#Account p {
+    color: white;
+}
+.add_new_profile{
+    font-size: 1rem;
+    color: blue !important;
+}
+.profile_form_components,.new_job_form_components{
+    display: flex;
+    box-sizing: border-box;
+    color:rgb(110, 110, 110);
+    width: 100%;
+}
+.profile_form_components{
+    width: 80% !important;
+}
+div#Address,div#Experience,div#Education.card-body{
+    min-height: 1px;
+    padding: 1px;
+    border: 1px;
+    position: relative;
+    margin: 1px;
+    color:whitesmoke;
+
+}
+.notification .container{
+    background-color: #222629 !important;
+}
+.notification #headline{
+    /* background-color: #EDDCD2; */
+    border: none !important;
+    color:whitesmoke;
+}
+#edit_Address{
+    /* width: 200rem; */
+}
+#job-response-form label,#new-Experience-form select,div#edit_Education input{
+    color:black !important;
+}
+
+
+div#edit_Experience,div#edit_Education  input,label,select{
+    font-size: 1rem;
+    color:#FFF1E6;
+}
+div#edit_Experience,div#edit_Education option{
+    font-size: 1rem;
+}
+
+div#jobs .card{
+    width:20rem;
+    height: 20rem;
+    border-radius: 25px;
+    position: -webkit-sticky;
+    border: none;
+    background-color: #EDDCD2;
+    
+}
+div#jobs h1{
+    font-size: 1.5rem;
+    text-align: center;
+    
+}
+div#jobs a{
+    color:#e96b39 !important;
+}
+div#jobs p{
+    font-size: 1rem;
+}
+div#index label{
+    color: rgb(15, 15, 15) !important;
+    font-size:0.7rem;
+}
+#new-job-form .form-group label{
+    color:whitesmoke !important;
+}
+div#index .nav-item h1{
+    font-size: 1rem;
+}
+
+
+div#jobs.flex-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content:space-between;
+    align-items:baseline;
+    align-content: space-around;
+    
+}
+div#display.flex-container{
+    display: grid !important;
+    /* flex-flow: column nowrap!important;
+    flex-direction: row; */
+}
+#display p{
+    color:whitesmoke;
+}
+div.card.item {
+    flex-grow: 0;
+    align-self:flex-start;
+    
+    flex-shrink: 3;
+}
+a#button.active{
+    color:green;
+}
+div.headline{
+    padding-top: 16px !important;
+  
+}
+.job-communication-block{
+    box-shadow:  3px 3px 10px  #aaaaaa;
+    background-color:#EDDCD2;;
+
+}
+.job-communication-block h1#scheduled-date-time{
+color:black !important;
+}
+
+h1#title-job{
+    font-size: 1.8rem;
+    
+}
+#title-job a{
+    color:rgb(235, 154, 62);
+}
+#technician-name a,#customer-name a {
+    font-size: 1.4rem;
+    color:rgb(243, 166, 65);
+}
+#title-job span{
+    font-size: 0.8rem;
+    padding-top: 10px;
+    color: gray;
+}
+h1#title{
+    font-size: 1.2rem;
+    
+}
+#title a{
+    color:rgb(221, 115, 45);
+}
+h1#quote,h1#requested-date-time-job,h1#requested-budget,h1#message,h1#jobresponse-status,h1#scheduled-budget,h1#scheduled-date-time,h1#scheduled-technician,h1#scheduled-job-message,
+h1#scheduled-customer, h1#status, h1#requested-date-time{
+    font-size: 1rem;
+   color:black;
+
+
+}
+.discussion{
+    background-color: #EDDCD2;
+}
+h1#scheduled-date-time, h1#status,h1#requested-date-time{
+    color:whitesmoke;
+    
+}
+h1#accept-message,h1#reject-message{
+    font-size: 0.9rem;
+}
+#appointment a{
+    margin-top: -0.2rem;
+    font-size: 0.9rem;
+
+}
+#fix-appointment a:hover{
+    color:rgb(54, 173, 104);
+}
+#quote p,#requested p,#requested-budget p,#message p,#scheduled-budget p,#scheduled-date-time p,#scheduled-technician p,#scheduled-job-message p,#scheduled-customer p,
+#status p,#requested-date-time p{
+    margin-left: 1rem;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    text-decoration: none!important;
+}
+#scheduled-technician a{
+  
+    font-size:  1rem;
+    color:rgb(243, 166, 65);
+}
+a#see-response{
+    font-size: 0.8rem;
+    margin-left: -0.3rem;
+}
+#date-time-job{
+    color: gray;
+}
+.accept{
+    color:green;
+}
+.reject {
+    color:red;
+}
+
+button#like{
+    background-color: transparent;
+    border-radius: 10px;
+    border-color: skyblue;
+    
+    
+}
+.success h5{
+    color:whitesmoke;
+    font-size: 1rem;
+    padding: 3rem;
+}
+
+.rating { 
+    border: none;
+    float: left;
+  }
+  
+  .rating > input { display: none; } 
+  .rating > label:before { 
+    margin: 5px;
+    font-size:1.7rem;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005";
+  
+  }
+  
+  .rating > .half:before { 
+    content: "\f089";
+    position: absolute;
+  }
+  
+  .rating > label { 
+    color: rgb(74, 74, 74); 
+   float: right; 
+  }
+  
+  
+  
+  .rating > input:checked ~ label, 
+  .rating:not(:checked) > label:hover, 
+  .rating:not(:checked) > label:hover ~ label { color: #ff414e} 
+  
+  .rating > input:checked + label:hover, 
+  .rating > input:checked ~ label:hover,
+  .rating > label:hover ~ input:checked ~ label, 
+  .rating > input:checked ~ label:hover ~ label { color: #003165  } 
+ 
+  #profile-about .card{
+    width:1%;
+    box-shadow: 3px 3px 10px #e6e6e6;
+  }
+  #profile-about h1{
+      font-size: 1.3rem;
+  }
+  #profile-about .card-body{
+    font-size: 1rem;
+}
+.flex-main{
+    display: inline-flex;
+    justify-content: space-evenly;
+    
+}
+.flex-child {
+    flex: 3;
+    /* border: 2px solid rgb(34, 34, 33); */
+    padding:20rem;
+    align-self:flex-start;
+}  
+.about,#Contact {
+    color:whitesmoke;
+}
+.pagination{
+    margin-top:1.2rem;
+}
+.page-item{
+    background-color: transparent;
+}
+.page-link{
+    font-size: 1rem;
+}
+div#display_address .card {
+    font-size: 1rem;
+
+}
+#new-job-form button{
+    margin-top: 0.8rem;
+    font-size: 1rem;
+
+}
+.add_new_profile {
+    color: #86C232!important;
+}
+@media only screen and (max-width:620px) {
+    /* For mobile phones: */
+    div#signIn{
+        width:100%;
+        left:0%;
+        margin-bottom: 0%;
+    }
+    
+    .card-title a#logo{
+
+        font-size: 1.6rem;
+    
+    }
+    #mini-nav a,#mini-nav button{
+        font-size: 0.7rem;
+    }
+    nav#main-nav a {
+        font-size: 0.8rem;
+    }
+    div#jobs .card{
+        width:13rem;
+        height: 15rem;
+        
+    }
+    div#jobs h1{
+        font-size: 1rem;
+    }
+    
+
+    div#jobs p{
+        font-size: 0.8rem;
+    }
+    /* div#index .nav-item h1 {
+        font-size: 0.9rem;
+ 
+    } */
+    .left{
+        flex:30%;
+
+    }
+     .right{
+        flex:70%;
+
+    }
+    #footer small{
+
+        left:25%;
+
+        
+    
+    
+    }
+    .page-link{
+        font-size: 0.7rem;
+    }
+    h1#title{
+        font-size:1rem;
+    }
+    h1#requested-date-time,#requested-date-time p,h1#scheduled-date-time, #scheduled-date-time p{
+        font-size: 0.8rem;
+    }
+    div#display_address .card {
+        font-size: 0.8rem;
+        width: 10rem;
+
+    
+    }
+    div#display_address .card p{
+        font-size: 0.8rem;
+    }
+    #new-job-form button{
+
+        font-size: 0.8rem;
+    
+    }
+    div#index .nav-item h1{
+        font-size: 0.8rem;
+    }
+    div#index label{
+        font-size: 0.5rem;
+    }
+    h1#title-job{
+        font-size:1rem;
+    }
+    #title-job span{
+        font-size: 0.8rem;
+    }
+    .about button,#technician-name a{
+        font-size: 1rem;
+    }
+    h1#quote,#quote p, h1#requested-date-time-job,#requested-date-time-job p,h1#requested-budget,#requested-budget p,h1#message, #message p, h1#jobresponse-status  {
+        font-size: 0.8rem;
+    }
+    #job-profile h1{
+        font-size: 3rem;
+    }
+    #job-profile p{
+        font-size: 1.2rem;
+    }
+    #job-profile a.text-success {
+        font-size: 0.7rem;
+    }
+    .profile .about  strong{
+        font-size: 1rem;
+    }
+    #job-profile i{
+        font-size: 1rem;
+    }
+    #Account p {
+        font-size: 1rem;
+    }
+    .fa-pencil{
+        font-size: 1rem  !important
+    }
+   
+}
+  @media only screen and (max-device-width: 480px) {
+    #mini-nav a,#mini-nav button{
+        font-size: 0.5rem;
+    }
+  }

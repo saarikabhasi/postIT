@@ -1,0 +1,240 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block head %}
+{% load crispy_forms_tags %}
+
+<script type ="text/javascript" src="{% static 'util.js' %}"></script>
+<script type ="text/javascript" src="{% static 'function.js' %}"></script>
+<script type ="text/javascript" src="{% static 'discussion.js' %}"></script>
+
+{%endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <main class="col-md-9  col-lg-10 px-md-4 "> 
+            {% for discussion in discussions %}
+            
+            <div class="container card pt-5 mt-5 rounded discussion " id="discussion-{{discussion.id}}">
+                    <div id="headline-{{discussion.Jobrequest.Job.id}}" class="card-title p-0 m-0 ">
+                         <!-- about job -->
+                        <h1 id="title-job"> 
+                            <a href="{% url 'advertisement:job_profile' type=discussion.Jobrequest.Job.Job_type|title id=discussion.Jobrequest.Job.id %}" id ="job-">{{discussion.Jobrequest.Job.Job_type|title}}</a>
+                        </h1>
+                        
+                        <div class="job-time-date">
+                            <h1 id="title-job">
+                     
+                                <span id ="date-time-job"> 
+                                on {{discussion.Jobrequest.Job.Date}} on {{discussion.Jobrequest.Job.Time}}
+                                </span>
+                            </h1>
+                        </div>
+                        
+                    </div>
+                    <hr>
+                    <div class="about card-body p-0 m-0 ">
+                        <!-- customer -->
+                       
+                            <!-- Job request -->
+                            
+                            {% if discussion.Jobrequest %}
+                                {% if request.user.is_customer%}
+                                <button class="btn mb-3"  type="button" data-toggle="collapse"  data-target="#job-request-{{discussion.Jobrequest.id}}"  aria-expanded="false" aria-controls="job-request-{{discussion.Jobrequest.id}}">
+                                    See Job request you received
+                                </button>
+                                {%else%}
+                                <button class="btn mb-3"  type="button" data-toggle="collapse"  data-target="#job-request-{{discussion.Jobrequest.id}}"  aria-expanded="false" aria-controls="job-request-{{discussion.Jobrequest.id}}">
+                                    See Job request you sent
+                                </button>
+                                {%endif%}
+                                <div id="job-request-{{discussion.Jobrequest.id}}" class="p-4 mb-5 job-communication-block collapse" >
+                                
+                                    <h1 id="technician-name">
+                                        <a href="{% url 'account:user_profile' username=discussion.Jobrequest.Technician.username id=discussion.Jobrequest.Technician.id|slugify %}">{{discussion.Jobrequest.Technician.username|title}}</a></h1>
+                                    </h1>
+                                    <h1 id="quote">{{"Quote"|title}}:
+                            
+                                        <span id ="quote">
+                                            <p >{{discussion.Jobrequest.Quote}}</p>
+                                        </span>
+                                    </h1>
+                                    <h1 id="requested-date-time-job">
+                                        {{"date & time:"|title}}
+                                        <span id ="requested">
+                                            <p >{{discussion.Jobrequest.Date}} on {{discussion.Jobrequest.Time}}</p>
+                                        </span>
+                                    </h1>
+                                    <h1 id="requested-budget">
+                                        {{"Budget"|title}}
+                                        <span id ="requested-budget">
+                                            <p >{{discussion.Jobrequest.Amount}} {{discussion.Jobrequest.Currency}}</p>
+                                        </span>
+                                    </h1>
+                                </div>
+                                <!-- Job response sent-->
+                                {% if request.user.is_customer %}
+                                    
+                                    {% if discussion.Jobresponse == None  %}
+                                   
+                                        <!-- show response form -->
+                                        
+                                        <button class="btn mb-3" type="button" data-toggle="collapse" data-target="#show-job-response-form-{{discussion.Jobrequest.id}}" aria-expanded="false" aria-controls="show-job-response-form-{{discussion.Jobrequest.id}}" >Give a response</button>
+                                    
+                                        <div class=" pt-0 mb-3  " id ="respond-job-request" >
+                                            <div id="show-job-response-form-{{discussion.Jobrequest.id}}" class=" collapse">
+                                                    
+                                                <form action="{% url 'account:job_response' jobrequestid=discussion.Jobrequest.id %}" method="POST" id="job-response-form" >
+                                                
+                                                {% csrf_token %}  
+                                                {{job_response_form|crispy}}
+                                                </form>
+                                                
+                                                <span class="p-2 m-2 ">
+                                                    <button name="btn" class ="btn accept" form = job-response-form type="submit"  value ="accept">Accept</button>
+                                                    <button name="btn" class ="btn reject" form = job-response-form type="submit"  value ="reject">Reject</button>
+                                                </span>
+                                            </div>
+                                            
+                                        </div>
+                                    {% else %}
+                                        <!-- see job response -->
+                                        <button class="btn mb-3" type="button" data-toggle="collapse" data-target="#job-response-{{discussion.Jobresponse.id}}" aria-expanded="false" aria-controls="show-job-response-{{discussion.Jobresponse.id}}" >
+                                            
+                                            See your Response
+                                        
+                                        </button>
+                                        <div class=" pt-3 m-3 " id ="show-job-response" >
+                                            <div id="job-response-{{discussion.Jobresponse.id}}" class="p-4 mb-5 job-communication-block collapse">
+                                                <h1 id="technician-name">
+                                                    <a href="{% url 'account:user_profile' username=discussion.Jobrequest.Technician.username id=discussion.Jobrequest.Technician.id|slugify %}">To {{discussion.Jobrequest.Technician.username|title}} ,</a></h1>
+                                                </h1>
+                                                <h1 id="message">{{"Message"|title}}:
+                                
+                                                    <span id ="message">
+                                                        <p >{{discussion.Jobresponse.Message}}</p>
+                                                    </span>
+                                                </h1>
+                                                <h1 id="requested-date-time-job">
+                                                    {{"date & time:"|title}}
+                                                    <span id ="requested">
+                                                        <p >{{discussion.Jobresponse.Date}} on {{discussion.Jobresponse.Time}}</p>
+                                                    </span>
+                                                </h1>
+                                                <h1 id="requested-budget">
+                                                    {{"Budget"|title}}
+                                                    <span id ="requested-budget">
+                                                        <p >{{discussion.Jobresponse.Amount}} {{discussion.Jobresponse.Currency}}</p>
+                                                    </span>
+                                                </h1>
+                                                <div id="job-response-result">
+                                                   
+                                                    <h1 id="jobresponse-status" >Status:  
+                                                        {%if discussion.Jobresponse.Jobrequest.Job.id in appointment_job_ids%}
+                                                        <span id="jobresponse-status" class="accept">Accepted 
+                                                            <a class="btn" name="fix-appointment" href=/advertisement/appointment/{{discussion.Jobresponse.Jobrequest.Job.id}}>see your appointment</a>
+                                                        </span>
+                                                        {%else%}
+                                                        <span id="jobresponse-status" class="reject">Pending/Reject</span>
+                                                        {%endif%}
+                                                        </h1>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% else %}
+
+                                        <button class="btn mb-3" type="button" data-toggle="collapse" data-target="#job-response-{{discussion.Jobresponse.id}}" aria-expanded="false" aria-controls="show-job-response-{{discussion.Jobresponse.id}}" >
+                                                    
+                                            See Response you received
+                                        
+                                        </button>
+                                        <div class=" pt-3 m-3 " id ="show-job-response" >
+                                            <div id="job-response-{{discussion.Jobresponse.id}}" class="p-4 mb-5 job-communication-block collapse">
+                                                <h1 id="technician-name">
+                                                    <a href="{% url 'account:user_profile' username=discussion.Jobrequest.Technician.username id=discussion.Jobrequest.Technician.id|slugify %}">To {{discussion.Jobrequest.Technician.username|title}} ,</a></h1>
+                                                </h1>
+                                                <h1 id="message">{{"Message"|title}}:
+                                
+                                                    <span id ="message">
+                                                        <p >{{discussion.Jobresponse.Message}}</p>
+                                                    </span>
+                                                </h1>
+                                                <h1 id="requested-date-time-job">
+                                                    {{"date & time:"|title}}
+                                                    <span id ="requested">
+                                                        <p >{{discussion.Jobresponse.Date}} on {{discussion.Jobresponse.Time}}</p>
+                                                    </span>
+                                                </h1>
+                                                <h1 id="requested-budget">
+                                                    {{"Budget"|title}}
+                                                    <span id ="requested-budget">
+                                                        <p >{{discussion.Jobresponse.Amount}} {{discussion.Jobresponse.Currency}}</p>
+                                                    </span>
+                                                </h1>
+                                                <div id="job-response-result">
+                                                    {% if discussion.Jobresponse.Response == "Accept" %}
+                                                        <h1 id="accept-message" class="accept">
+                                                            I have accepted your offer! please go ahead and schedule an appointment
+                                                            <div id="display-modal" class="modal" tabindex="-1">
+
+                                                            </div>
+                                                            
+                                                        {% if appointment_job_ids %}
+
+                                                            {%if discussion.Jobresponse.Jobrequest.Job.id in appointment_job_ids%}
+                                                                <span id="appointment">
+                                                                    <a class="btn" name="fix-appointment" href=/advertisement/appointment/{{discussion.Jobresponse.Jobrequest.Job.id}}>see your appointment</a>
+                                                                    <!-- <button class="btn" name="fix-appointment"  href='/advertisement/appointment/{{discussion.Jobresponse.Jobrequest.Job.id}}' value={{discussion.Jobresponse.id}} >see your appointment</button> -->
+                                                                </span>
+                                                            {%else%}
+                                                            <span id="appointment">
+                                                                <!-- <a class="btn text-danger" name="appointment" href="/advertisement/appointment/{{discussion.Jobresponse.id}}">schedule appointment</a> -->
+                                                                <button class="btn text-danger" name="fix-appointment" onclick=schedule_appointment(this) value={{discussion.Jobresponse.id}}>schedule appointment</button>
+                                                            </span>
+                                                            {%endif%}
+
+                                                        {%else%}
+                                                        <span id="appointment">
+                                                            <!-- <a class="btn text-danger" name="appointment" href="/advertisement/appointment/{{discussion.Jobresponse.id}}">schedule appointment</a> -->
+                                                            <button class="btn text-danger" name="fix-appointment" onclick='schedule_appointment(this)' value={{discussion.Jobresponse.id}}>schedule appointment</button>
+                                                        </span>
+                                                        {%endif%} 
+                                                    {%else%}
+                                                    <h1 id="reject-message" class="reject">Sorry! I am looking for something different </h1>
+                                                    
+                                                    {%endif%} 
+                                                   
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                {% endif %} 
+                                    
+                                   
+                            {%else%}
+                                <div>
+                                    <p class="text-info text-center"> You have no job request or job_response</p>
+                                </div>
+                            {% endif %}
+
+                            
+
+                       
+                        
+                    </div>
+
+
+            </div>
+            {%empty%}
+
+                <p class="text-info text-center"> You have no discussions</p>
+
+            {%endfor%}
+        </main>
+    </div>
+</div>
+
+
+
+{%endblock %}

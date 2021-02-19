@@ -1,0 +1,435 @@
+
+{% extends "layout.html" %}
+{% load static %}
+{% block head %}
+<script>
+    const profile = "{{Profile}}"
+    const experience = "{{Experience}}"
+</script>
+<script type ="text/javascript" src="{% static 'google.js' %}"></script>
+<script type ="text/javascript" src="{% static 'util.js' %}"></script>
+<script type ="text/javascript" src="{% static 'function.js' %}"></script>
+<script type ="text/javascript" src="{% static 'profile.js' %}"></script>
+
+{%endblock%}
+
+{% block body %}
+<div id="profile-settings" class="container-fluid" >
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light d-flex bd-highlight col-md-3 col-lg-2 d-md-block  sidebar collapse" id ="mini-nav">
+            <div class="position-sticky pt-3">
+                <ul class="navbar-nav flex-column">
+                    <li class="nav-item">
+    
+                        <a  id ="header" class ="nav-link btn-link btn active" data-section="Account" href="#Account" >Account </a>
+                    </li>
+                    <div id= "Account" class="d-none">
+                        <li class="nav-item">
+    
+                            <a  id ="button" class ="nav-link btn-link btn active" data-section="Fullname" href="#Fullname" >Fullname </a>
+                        </li>
+                                         
+                        <li class="nav-item">
+        
+                            <a  id ="button" class ="nav-link btn-link btn " data-section="Recovery_email" href="#Recovery_email" >Recovery email </a>
+                        </li>
+                        <li class="nav-item">
+        
+                            <a  id ="button" class ="nav-link btn-link btn " data-section="Phone_number" href="#Phone_number" >Phone number </a>
+                        </li>
+                       
+                    </div>
+                    <li class="nav-item">
+    
+                        <a  id ="header" class ="nav-link btn-link btn active" data-section="Profile" href="#Profile" >Profile </a>
+                    </li>
+                   <div id="Profile" class="d-none">
+                        {% if request.user.is_technician %}
+                        <li class="nav-item">
+                            
+                            <a  id ="button" class ="nav-link btn-link btn " data-section="About" href="#About" >Summary</a>
+                        </li>
+                        <li class="nav-item">
+                            
+                            <a  id ="button" class ="nav-link btn-link btn " data-section="Designation" href="#Designation" >Designation</a>
+                        </li>
+                        <li class="nav-item">
+                            
+                            <a  id ="button" class ="nav-link btn-link btn " data-section="Licence" href="#Licence" >License</a>
+                        </li>
+
+                        <li class="nav-item">
+                            
+                            <a  id ="button" class ="nav-link btn-link btn " data-section="Totalexperience" href="#Totalexperience" >Experience(years)</a>
+                        </li>
+
+                        <li class="nav-item">
+                            
+                            <a  id ="button" class ="nav-link btn-link btn " data-section="Experience" href="#Experience" >Organisation</a>
+                        </li>
+                        <li class="nav-item">
+                            
+                            <a  id ="button" class ="nav-link btn-link btn " data-section="Education" href="#Education" >Education</a>
+                        </li>
+                        {%endif%}
+                        <li class="nav-item">
+                        
+                            <a  id ="button" class ="nav-link btn-link btn " data-section="Address" href="#Address" >Address </a>
+                        </li>
+                        
+                   </div>
+
+                    
+                   
+
+                </ul>
+            </div>
+        </nav>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 ">
+            
+                
+                <div id="profile-account">
+                    
+                    <div id="Account" class="d-none">
+                        <h1>Account setting</h1>
+                        <!-- Fullname -->
+                        <fieldset>
+                            <legend >     
+                                <section >
+                                    <p><strong>Full name</strong> </p>
+                                    <article class="flex-container" id="article_Fullname">
+                                        {%if Profile.Fullname %}
+                                        <div id = "profile_Fullname" class="flex-container">
+                                            <p id ="Fullname">{{Profile.Fullname}}</p> 
+                                            <span>
+                                                <input type="hidden" id="edit" value="{{Profile.Fullname}}"/><a id = "edit" name ="edit"  type ="submit"  onclick = "edit_profile('Fullname')"><i class="fa fa-pencil" style = "color:#f7786b"></i></a>
+                                            </span>
+                                        </div>
+                                        <div id="edit_Fullname" class="profile_edits">
+
+                                        </div>
+                                        {%else%}
+                                        
+                                        <p id ="Fullname">
+                                            <input type="hidden" id="add"/>
+                                        <a id = "add_new_Fullname" class="add_new_profile"  name ="add" type ="submit"  onclick = "add_new_profile('Fullname')">Add full name</i></a>
+                                        {%endif%}
+                                    </p> 
+                                    </article>
+                                </section>        
+                            </legend>
+                        </fieldset>
+                        <hr>
+                        <!-- Recovery_email  -->
+                        <fieldset>
+                            <legend >     
+                                <section>
+                                    <p><strong>Recovery email</strong> </p>
+                                    <article class="flex-container" id="article_Recovery_email" >
+                                        {%if Profile.Recovery_email %}
+                                        <div id = "profile_Recovery_email" class="flex-container">
+                                            <p id ="Recovery_email">{{Profile.Recovery_email}}</p>
+                                           
+                                            <span> <input type="hidden" id="edit" value="{{Profile.Recovery_email}}"/><a id = "edit" name ="edit"  type ="submit" onclick = "edit_profile('Recovery_email')"><i class="fa fa-pencil" style = "color:#f7786b"></i></a> </span> 
+                                        </div>
+                                    <div id="edit_Recovery_email">
+
+                                    </div>
+                                        {%else%}
+                                        <p id ="Recovery_email" class="profile_edits">
+                                        <a id = "add_new_Recovery_email" class = "add_new_profile" name ="add"  type ="submit"  onclick = "add_new_profile('Recovery_email')">Add a recovery email</i></a>
+                                        </p> 
+                                        {%endif%}
+                           
+                                    </article>
+                                </section>        
+                            </legend>
+                        </fieldset>
+                        <hr>
+                        <!-- Phone number -->
+                        <fieldset>
+                            <legend >     
+                                <section>
+                                    <p><strong>Phone number</strong> </p>
+                                    <article class="flex-container" id="article_Phone_number">
+                                        {%if Profile.Phone_number %}
+                                        <div id = "profile_Phone_number" class="flex-container">
+                                            <p id ="Phone_number">{{Profile.Phone_number}}</p>
+                                           
+                                            <span> <input type="hidden" id="edit" value="{{Profile.Phone_number}}"/><a id = "edit" name ="edit"  type ="submit" onclick = "edit_profile('Phone_number')"><i class="fa fa-pencil" style = "color:#f7786b"></i></a> </span> 
+                                        </div>
+                                    <div id="edit_Phone_number">
+
+                                    </div>
+                                        {%else%}
+                                        <p id ="Phone_number" class="profile_edits">
+                                        <a id = "add_new_Phone_number" class = "add_new_profile" name ="add"  type ="submit"  onclick = "add_new_profile('Phone_number')">Add phone number</i></a>
+                                        </p> 
+                                        {%endif%}
+                           
+                                    </article>
+                                </section>        
+                            </legend>
+                        </fieldset>
+                        <hr>                        
+
+                    </div>
+                    <div id="Profile"  class="d-none">
+                        <h1>Profile setting</h1>
+                        {% if request.user.is_technician%}
+                        <!-- Summary -->
+                        <fieldset>
+                            <legend >     
+                                <section >
+                                    <p><strong>Summary</strong> </p>
+                                    <article class="flex-container" id="article_About">
+                                        {%if Profile.About %}
+                                        <div id = "profile_About" class="flex-container">
+                                            <p id ="About">{{Profile.About}}</p> 
+                                            <span>
+                                                <input type="hidden" id="edit" value="{{Profile.About}}"/><a id = "edit" name ="edit"  type ="submit"  onclick = "edit_profile('About')"><i class="fa fa-pencil" style = "color:#f7786b"></i></a>
+                                            </span>
+                                        </div>
+                                        <div id="edit_About" class="profile_edits">
+
+                                        </div>
+                                        {%else%}
+                                       
+                                        <p id ="About">
+                                         <input type="hidden" id="add"/>
+                                        <a id = "add_new_About" class="add_new_profile"  name ="add" type ="submit"  onclick = "add_new_profile('About')">Add a Summary</i></a>
+                                        {%endif%}
+                                    </p> 
+                                    </article>
+                                </section>        
+                            </legend>
+                        </fieldset>
+                        <hr>                         
+
+                        <!-- Designation -->
+                        <fieldset>
+                            <legend >     
+                                <section >
+                                    <p><strong>Current designation</strong> </p>
+                                    <article class="flex-container" id="article_Designation">
+                                        {%if Profile.Designation %}
+                                        <div id = "profile_Designation" class="flex-container">
+                                            <p id ="Designation">{{Profile.Designation}}</p> 
+                                            <span>
+                                                <input type="hidden" id="edit" value="{{Profile.Designation}}"/><a id = "edit" name ="edit"  type ="submit"  onclick = "edit_profile('Designation')"><i class="fa fa-pencil" style = "color:#f7786b"></i></a>
+                                            </span>
+                                        </div>
+                                        <div id="edit_Designation" class="profile_edits">
+
+                                        </div>
+                                        {%else%}
+                                       
+                                        <p id ="Designation">
+                                         <input type="hidden" id="add"/>
+                                        <a id = "add_new_Designation" class="add_new_profile"  name ="add" type ="submit"  onclick = "add_new_profile('Designation')">Add current Designation</i></a>
+                                        {%endif%}
+                                    </p> 
+                                    </article>
+                                </section>        
+                            </legend>
+                        </fieldset>
+                        <hr> 
+                        <!-- License -->
+                        <fieldset>
+                            <legend >     
+                                <section >
+                                    <p><strong>Licence</strong> </p>
+                                    <article class="flex-container" id="article_Licence">
+                                     
+                                        <div id = "profile_Licence" class="flex-container">
+                                            <label for='Licence'> 
+                                            {% if Profile.Licence %}
+                                            <input type="checkbox" id ="Licence" name="Licence" onclick = "update_licence(this)" checked>
+                                            {%else%}
+                                            <input type="checkbox" id ="Licence" name="Licence" onclick = "update_licence(this)" >
+                                            
+                                            {%endif%}
+                                            Licence
+                                        </label>
+                                           
+                                        </div>
+
+                                       
+                                       
+                                        
+                                    
+                                    </article>
+                                </section>        
+                            </legend>
+                        </fieldset>
+                        <hr> 
+
+                        <!-- Total number of experience    -->
+                        <fieldset>
+                            <legend>     
+                                <section>
+                                    <p><strong>Total number of  Experience</strong> </p>
+                                    
+                                    <article class="flex-container" id="article_Totalexperience">
+                                        {%if Profile.Totalexperience %}
+                                        <div id = "profile_Totalexperience" class="flex-container">
+                                            <p id ="Totalexperience">{{Profile.Totalexperience}}</p>
+                                        
+                                            <span> <input type="hidden" id="edit" value="{{Profile.Totalexperience}}"/><a id = "edit" name ="edit"  type ="submit" onclick = "edit_profile('Totalexperience')"><i class="fa fa-pencil" style = "color:#f7786b"></i></a> </span> 
+                                        </div>
+                                    <!-- <div id="edit_Totalexperience">
+
+                                    </div> -->
+                                        {%else%}
+                                        <p id ="Totalexperience" class="profile_edits">
+                                        <a id = "add_new_Totalexperience" class = "add_new_profile" name ="add"  type ="submit"  onclick = "add_new_profile('Totalexperience')">Add total number of experience</i></a>
+                                        </p> 
+                                        {%endif%}
+                                        <div id="edit_Totalexperience">
+
+                                        </div>
+                                    </article>
+                                </section>
+                            </legend>
+                        </fieldset>
+
+                        <hr>  
+                        <!-- Experience-->
+                        <fieldset>
+                            <legend>     
+                                <section>
+                                    <p><strong>Current Employment</strong> </p>
+                                    
+                                    <article class="flex-container" id="article_Experience">
+                                                                                    
+                                        {%if Experience %}
+                                        <div id = "profile_Experience" class="profile_form_components flex-container">
+                                        
+                                            <div id ="Experience" class="card-body">
+                                    
+                                                <p id ="Title">{{Experience.Title}}</p>
+                                                <p id ="Employment_type">{{Experience.Employment_type}}</p>
+                                                <p id ="Company">  {{Experience.Company}}</p>
+                                                <p id ="Start_date">{{Experience.Start_date}}</p>
+                                                <p id ="End_date">{{Experience.End_date}}</p>
+
+                                            </div>
+                                            <span>
+                                                <input type="hidden" id="edit" value="{{Experience.id}}"/>
+                                                <a id = "edit" name ="edit"  type ="submit" onclick = "edit_profile('Experience')"><i class="fa fa-pencil" style = "color:#f7786b"></i></a>
+                                            </span>
+                                        </div>
+                                        <div id="edit_Experience" class="profile_edits">
+
+                                        </div>
+                                            
+                                        {%else%}
+                                        <p id ="Experience"> 
+                                        <a id = "add_new_experience" class = "add_new_profile"  name ="add"  href = "#Experience"  onclick = "add_new_profile('Experience')">Add Experience</a>
+                                        </p>
+                
+
+                                        {%endif%}
+                                    </article>
+                                </section>
+                            </legend>
+                        </fieldset>
+                        <hr>
+                        <!-- Education  -->
+                        <fieldset>
+                            <legend>     
+                                <section>
+                                    <p><strong>Education</strong> </p>
+                                    
+                                    <article class="flex-container"  id="article_Education">
+                                                                                    
+                                        {%if Education %}
+                                        <div id = "profile_Education" class="profile_form_components flex-container">
+                                        
+                                            <div id ="Education" class="card-body">
+                                    
+                                                <p id ="School">{{Education.School}}</p>
+                                                <p id ="Degree">{{Education.Degree}}</p>
+                                                <p id ="Field_of_study">  {{Education.Field_of_study}}</p>
+                                                <p id ="Start_date">{{Education.Start_date}}</p>
+                                                <p id ="End_date">{{Education.End_date}}</p>
+
+                                            </div> 
+                                            <span>
+                                                <input type="hidden" id="edit" value="{{Education.id}}"/>
+                                                <a id = "edit" name ="edit"  type ="submit" onclick = "edit_profile('Education')"><i class="fa fa-pencil" style = "color:#f7786b"></i></a>
+                                            </span>
+                                        </div>
+                                        <div id="edit_Education" class="profile_edits">
+
+                                        </div>
+                                            
+                                        {%else%}
+                                        <p id ="Education"> 
+                                        <a id = "add_new_education" class = "add_new_profile"  name ="add"  href = "#Education"  onclick = "add_new_profile('Education')">Add Education</a>
+                                        </p>
+                
+
+                                        {%endif%}
+                                    </article>
+                                </section>
+                            </legend>
+                        </fieldset>
+                        <hr>  
+                        {%endif%}
+                        <!-- Address -->
+                        <fieldset>
+                            <legend >     
+                                <section>
+                                    <p><strong>Address</strong> </p>
+                                    
+                                    <article class="flex-container" id="article_Address">
+                                  
+                                        {%if Address %}
+                                        <div id = "profile_Address" class="profile_form_components flex-container">
+                                            <div id ="Address" class="card-body">
+
+                                                <p id="Line1">{{Address.Line1}}</p>
+                                                <p id="Line2">{{Address.Line2}}</p>
+                                                <p id="City">{{Address.City}}</p>
+                                                <p id ="State">{{Address.State}}</p>
+                                                <p id = "Country">{{Address.Country}}</p>
+                                                <p id ="Zipcode">{{Address.Zipcode}}</p>
+                                            </p>
+                                             </div>
+                                             <span > 
+                                                <input type="hidden" id="autocomplete" name = "Address line1 " value="{{Address.id}}"  autocomplete="off-street-address"/>
+                                                <a id = "edit" name ="edit"  type ="submit" onclick = "edit_profile('Address')" ><i class="fa fa-pencil" style = "color:#f7786b"></i></a>
+                                            </span>
+                                        </div>
+                               
+                                        <div id = "edit_Address" class="profile_edits">
+              
+                                        </div>
+                                
+                                        {%else%}
+                                        <p id ="Address">
+                                        <a id = "add_new_Address" class = "add_new_profile" name ="add" href="#Address" type ="submit"  onclick = "add_new_profile('Address')">Add address</i></a>
+                                        </p>
+                                        {%endif%}
+                                    </article>
+                                </section>        
+                            </legend>
+                        </fieldset>
+                        <hr>
+
+                                          
+                        
+                    </div>
+                   
+
+                        
+                
+                   
+                
+           
+
+                 
+        </div>
+     </main>
+{%endblock%}

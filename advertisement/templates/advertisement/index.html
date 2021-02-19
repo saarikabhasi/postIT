@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Posts
+{% endblock %}
+{% load static %}
+{% block head %}
+<script type ="text/javascript" src="{% static 'util.js' %}"></script>
+<script type ="text/javascript" src="{% static 'function.js' %}"></script>
+<script type ="text/javascript" src="{% static 'index.js' %}"></script>
+
+
+
+{%endblock%}
+{% block body %}
+
+
+
+<div id="index" class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 col-xl-2   bd-highlight  sidebar"  id = "mini-nav">
+                <div class="position-sticky pt-3">
+                    <div class="row">
+                        <ul class="navbar-nav flex-column col-xs">
+                            <li class="nav-item">
+
+                                <h1>Status</h1>
+
+                                    <div class="card-body">
+                                    <div class="form-group">                     
+                                        <input type="checkbox" id="filter" name="status" value="OPEN">
+                                        <label for="status">Open</label><br>
+                    
+                                        <input type="checkbox" id="filter" name="status" value="PENDING">
+                                        <label for="status">Pending</label><br>
+                                    </div>
+
+                                    </div>
+        
+                            </li>
+                        </ul>
+                        <hr>
+                        <ul class="navbar-nav flex-column col-xs">
+                            <li class="nav-item">
+                
+                                <h1>Job Type</h1>
+
+                                <div class="card-body">
+                                    <div class="form-group">                     
+                                        <input type="checkbox" id="filter" name="type" value="ELECTRICAL" >
+                                        <label for="status">Electrical</label><br>
+                    
+                                        <input type="checkbox" id="filter" name="type" value="PLUMBING">
+                                        <label for="status">Plumbing</label><br>
+                                        <input type="checkbox" id="filter" name="type" value="HANDYMAN">
+                                        <label for="status">Handyman</label><br>
+                                    </div>
+
+                                </div> 
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            
+        
+     
+        </div>
+        <div class="col-md-9 col-xl-10">
+        <main class=" ms-sm-auto   ">  
+            
+            <div id="jobs" class="flex-container ">
+
+               
+
+                {% for job in jobs %}
+                    
+                    
+                    
+
+      
+                        <div class="card item col-xs-1 p-1 m-1" id ="job-id-{{job.id}}">
+                            <h1 class="card-title"> 
+                                <a href = "{% url 'advertisement:job_profile' type=job.Job_type|title id=job.id %}">{{job.Job_type|title}} </a> 
+                            </h1>
+                        
+                            
+                            <hr>
+                            <div class="card-body">
+                                
+                
+                                <p>Event Date: {{job.Date|date:"D M d Y"}}</p>
+                                <p> Priority: {{job.Priority}}</p>
+                                
+                                <p id="status">Status: {{job.Status}}</p>
+                                
+                                {%if job.id in job_requests_ids%}
+                                <p class="text-success"><i class="fa fa-check">Applied</i></p>
+                                {%endif%}
+                            </div>
+                        
+                        </div>
+                        
+        
+                {%endfor%}
+        
+            </div>
+
+            
+        </main>
+        </div>
+
+
+    </div>
+    
+</div>
+    {% if jobs.has_other_pages %}
+    <ul class="pagination justify-content-center">
+        {% if jobs.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ jobs.previous_page_number }}">Previous</a></li>
+        {% else %}
+        <li class="page-item disabled"><span class="page-link">Previous</span></li>
+        {% endif %}
+        {% for i in jobs.paginator.page_range %}
+            {% if jobs.number == i %}
+                <li class="active page-item"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if jobs.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ jobs.next_page_number }}">Next</a></li>
+        {% else %}
+        <li class="disabled page-item"><span class="page-link">Next</span></li>
+        {% endif %}
+            </ul>
+    {% endif %}
+
+{% endblock %}

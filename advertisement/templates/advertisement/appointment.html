@@ -1,0 +1,112 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Posts
+{% endblock %}
+{% load static %}
+{% block head %}
+<script type ="text/javascript" src="{% static 'util.js' %}"></script>
+<script type ="text/javascript" src="{% static 'function.js' %}"></script>
+
+
+
+
+{%endblock%}
+{% block body %}
+    {%if appointment %}
+
+    
+    <div class="container">
+        <div class="row">
+            <main class="col-md-9  col-lg-10 px-md-4 ">
+                
+                <div class="container card pt-5 mt-5 rounded  job-communication-block " id="appointment-{{appointment.id}}">
+                    {% if review%}
+                    <a href="{% url 'advertisement:review' id=appointment.id %}" class="text-right">review</a>
+                    {%endif%}
+                    {%if send_review %}
+                    <a class="text-right text-success">You have reviewed</a>
+                    {%endif%}
+                    <div id="headline" class="card-title p-0 m-0 ">
+                        <!-- about job -->
+                       <h1 id="title-job"> 
+                           <a href="{% url 'advertisement:job_profile' type=appointment.Job.Job_type|title id=appointment.Job.id %}">{{appointment.Job.Job_type|title}}</a>
+                       </h1>
+                       <span>
+                        
+                            <i class="fa fa-map-marker" >  
+                                {% if appointment.Job.Location %}
+                                {{appointment.Job.Location.Line1}},
+                                {%if appointment.Job.Location.Line2 %}
+                                    {{appointment.Job.Location.Line2}},
+                                {%endif%}
+                                {{appointment.Job.Location.City}}, {{appointment.Job.Location.State}}, {{appointment.Job.Location.Country}}, {{appointment.Job.Location.Zipcode}}
+                                {%endif%}
+                            </i> 
+                        </span>
+                        <hr>
+                        <div class="scheduled-job-technician">
+                       
+                            <h1 id="scheduled-technician">
+                                {{"Technician:"|title}}
+                                <span id="scheduled-technician">
+                                   <p>
+                                    <a href="{% url 'account:user_profile' username=appointment.Technician.username id=appointment.Technician.id|slugify %}">{{appointment.Technician.username|title}}</a>
+                                   </p> 
+                                </span>
+                                
+                            </h1>  
+                       </div>
+                       <div class="scheduled-job-customer">
+                       
+                        <h1 id="scheduled-customer">
+                            {{"Customer:"|title}}
+                            <span id="scheduled-customer">
+                               <p>
+
+                                   <a href="{% url 'account:user_profile' username=appointment.Jobresponse.Customer.username id=appointment.Jobresponse.Customer.id|slugify %}">{{appointment.Jobresponse.Customer.username|title}}</a>
+                               </p> 
+                            </span>
+                            
+                        </h1>  
+                   </div>
+
+                       <div class="scheduled-job-message">
+                       
+                        <h1 id="scheduled-job-message">
+                            {{"Message:"|title}}
+                            <span id="scheduled-job-message">
+                               <p>
+                                {{appointment.Jobresponse.Message}}
+                               </p> 
+                            </span>
+                            
+                        </h1>  
+                   </div>
+                       <div class="scheduled-job-time-date">
+                    
+                            <h1 id="scheduled-date-time">
+                                {{"Scheduled date & time:"|title}}
+                               <span id ="scheduled-date-time"> 
+                                <p>{{appointment.Jobresponse.Date}} & Time: {{appointment.Jobresponse.Time}}</p>
+                               </span>
+                           </h1>
+                       </div>
+                       <div class="scheduled-job-budget">
+                        <h1 id="scheduled-budget">
+                            {{"Budget:"|title}}
+                            <span id ="scheduled-budget">
+                                <p >{{appointment.Jobresponse.Amount}} {{appointment.Jobresponse.Currency}}</p>
+                            </span>
+                            </h1> 
+                        </div>     
+                   </div>
+                  
+
+                </div>
+               
+            </main>
+        </div>
+    </div>
+    {%endif%}
+{%endblock%}

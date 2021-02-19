@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Posts
+{% endblock %}
+{% load static %}
+{% block head %}
+{% load crispy_forms_tags %}
+
+<script type ="text/javascript" src="{% static 'util.js' %}"></script>
+<script type ="text/javascript" src="{% static 'function.js' %}"></script>
+<script type ="text/javascript" src="{% static 'index.js' %}"></script>
+{%endblock%}
+{% block body %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 ">  
+    <div class="container ">
+    {%if error %}
+       
+        <p class="text-danger"> {{error}}</p>
+    {%else%}
+        {%if message %}
+            <p class="text-success">{{message}}</p>
+        {%endif%}
+    {%endif%}  
+    <form action="{% url 'advertisement:job_application' id=id  %}" method="POST" id="application" >
+        {% csrf_token %}          
+        
+        {{applicationForm|crispy}}
+        
+       
+        
+    </form> 
+    <button id="application-button" class="btn btn-primary mt-5 p-1 mb-5" form="application" >send request</button>
+    
+    </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,158 @@
+{% extends "layout.html" %}
+{% block title %}
+    Profile
+{% endblock %}
+{% load static %}
+{% block head %}
+
+
+<script type ="text/javascript" src="{% static 'util.js' %}"></script>
+<script type ="text/javascript" src="{% static 'function.js' %}"></script>
+<script type ="text/javascript" src="{% static 'index.js' %}"></script>
+{%endblock%}
+{% block body %}
+
+
+            <div class="profile" id="profile-title-{{user_info.id}}">
+              <div class="jumbotron jumbotron-fluid" id="job-profile">
+                <h1 class="display-4 text-center">
+                  {%if profile.Fullname %}
+                      {{profile.Fullname|title}}
+                  {%else%}
+                    {{user_info.username |title}}
+                  {%endif%}
+                </h1>
+              
+                <p class="lead text-center">
+
+                  {%if user_info.is_technician %}
+                    {% if profile.Designation %}
+                      {{profile.Designation|title}} at
+                    {%else%}
+                      Employee at
+                    {%endif%}
+                    {% if profile.Experience.Company %}
+                      {{profile.Experience.Company}}
+                    {%else%}
+                      -
+                    {%endif%}
+                  
+                  
+
+                  {%endif%}
+                </p>
+                <p class="lead text-center">  
+                  {% if reviews %}
+
+                {{average_reviews.Rating__avg|floatformat}}/5
+                
+                  <small class=" fa fa-star"> {{reviews|length}} Reviews</small>
+                  {%endif%}
+                </p> 
+                 
+                <hr class="my-4">
+              </div>
+              {%if user_info.is_technician %}
+              <div class ="about ms-sm-auto  px-md-4 ">
+                <p>
+                  <strong>About:</strong>
+                  {% if profile.About %}
+                  {{profile.About}} 
+                  {%else%}
+                  -
+                  {%endif%}
+                </p>
+                <p>
+                  <strong>Total Experience: </strong>
+                  {% if profile.Totalexperience %}
+                  {{profile.Totalexperience }}
+                  {%else%}
+                  - 
+                  {%endif%}
+                </p>
+                <p> 
+                  <strong>Licence:</strong>
+                  {% if profile.Licence %}
+                  yes
+                  {%else%}
+                  No
+                  {%endif%}
+                  </p>
+                <hr class="my-4">
+                
+              </div>
+             
+              <div class="container">
+                <div class="row">
+                  <main class="col-md-12 ms-sm-auto col-lg-12 px-md-4 flex-main " id="profile-about">
+
+                      <div class="card flex-child  align-self-center p-1 m-3" id ="Experience-{{profile.Education.id}}">
+                        <h1 class="card-title p-0 m-0 text-center">Experience</h1>
+                        <hr>
+                        <div class="card-body p-0 m-0">
+                          <p> {{profile.Experience.Title}}</p>
+                          <p> {{profile.Experience.Employment_type}}</p>
+                          <p> {{profile.Experience.Company}}</p>
+                          <p> {{profile.Experience.Start_date}}</p>
+                          <p> {{profile.Experience.End_date}}</p>
+          
+                        </div>
+                      </div>
+               
+                    
+                      
+                      <div class="card flex-child    p-1 m-3" id ="Education-{{profile.Education.id}}">
+                        <h1 class="card-title p-0 m-0 text-center">Education</h1>
+                        <hr>
+                        <div class="card-body p-0 m-0 ">
+                          <p> {{profile.Education.School}}</p>
+                          <p> {{profile.Education.Degree}}</p>
+                          <p> {{profile.Education.Field_of_study}}</p>
+                          <p> {{profile.Education.Start_date}}</p>
+                          <p> {{profile.Education.End_date}}</p>
+                        </div>
+                        </div>
+            
+                  
+                  </main>
+
+                </div>
+              </div>
+              <hr>
+              {%endif%}
+             
+                  <div class=" p-1 m-3" id ="Contact">
+                    <h1 class=" p-0 m-0 text-center"><i class="fa fa-id-badge"></i></h1>
+                   
+                    <div class="p-0 m-0 text-center">
+                      <ul class="list-unstyled mb-0">
+                        <li><i class="fa fa-phone mt-4 fa-2x"></i>
+                          <p>
+                            {% if profile.Phone_number %}
+                            {{profile.Phone_number}}
+                            {%else%}
+                            - 
+                            {%endif%}
+                          </p>
+                        </li>
+                        <li><i class="fa fa-envelope mt-4 fa-2x"></i>
+                          <p>
+                            {% if user_info.email %}
+                            {{user_info.email }}
+                            {%else%}
+                            - 
+                            {%endif%}
+
+                          </p>
+                        </li>
+                      </ul>
+                      
+                     
+      
+                    </div>
+                  </div>
+     
+      
+               
+              
+  {%endblock%}

@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block head %}
+<script type ="text/javascript" src="{% static 'authenticate.js' %}"></script>
+{% endblock %}
+{% block body %}
+
+
+
+<div class = "card flex-main" id = "signIn">
+    <fieldset >
+        <legend class="card-body"> 
+            <h2 class="card-title">
+                <a class="navbar-brand text-monospace text-center" id = "logo">PostIT</a>
+                <hr>
+                <div>
+
+                        Don't have an account? 
+
+                    <span>
+                        <a href="{% url 'account:register' %}" class = "btn-link" id="createaccount">Register here.</a> 
+                    </span>
+                </div>
+            </h2>
+        </legend>
+    </fieldset>
+
+    <fieldset class="card-body">
+        <legend >
+            <h2 class="card-title">Sign In </h2>
+        
+            <form action="{% url 'account:login' %}" method="post" class = "card-body">
+                {% csrf_token %} 
+                {% if message %}
+                    <p class="text-danger lead">{{ message }}</p>
+                {% endif %}
+                <div class = "form-group ">
+                    <fieldset>
+                        <legend><h3>Username or email address</h3>
+                            
+                            <input autofocus class="form-control" type="text" name="username_or_email" placeholder="">
+                        </legend>
+                    </fieldset>
+                </div>
+                
+                <div class="form-group">          
+                    <fieldset>
+
+                        <legend><h3>Enter your password</h3>
+                            <input class="form-control" id ="show_password" type="password" name="password" placeholder=""  >
+                            <input type="checkbox" onInput="showCurrentValue(show_password)"> <label for="show">show password</label>
+
+                        </legend>
+                    </fieldset>
+                </div>
+            
+                <div class="form-group">          
+                    <fieldset class="role" >
+                    <label for="role">Choose a role:</label>
+                        <div class="flex-container">
+                            <input type="radio" id="is_customer" name="role" value="is_customer" required=True>
+                            <label for="customer">Customer</label><br>
+        
+                            <input type="radio" id="is_technician" name="role" value="is_technician" required=True>
+                            <label for="technician">Technician</label><br>
+                        </div>
+                       
+    
+                 
+                   
+                    </fieldset>
+                </div>
+                <div class="form-group">
+                    <input class="btn text-monospace" type="submit"  value="submit">
+                    
+                
+                </div>
+
+            </form>
+        </legend> 
+    </fieldset>
+</div>
+
+{% endblock %}

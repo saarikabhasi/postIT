@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Posts
+{% endblock %}
+{% load static %}
+{% block head %}
+<script type ="text/javascript" src="{% static 'util.js' %}"></script>
+<script type ="text/javascript" src="{% static 'function.js' %}"></script>
+<script type ="text/javascript" src="{% static 'index.js' %}"></script>
+{%endblock%}
+{% block body %}
+
+<div class="job-profile" id="job-profile-{{job.id}}">
+  <div class="jumbotron jumbotron-fluid" id="job-profile">
+    <p class=" p-2 m-2 text-right">
+      {% if user.is_technician%}
+        {%if request_sent %}
+            <!-- request already sent so display see request -->
+            <a class="text-success" href=/account/discussion#headline-{{job.id}}>See your Request</a>
+        {%else%}
+        
+            {% if job.Status == "OPEN" or job.Status == "Open" %}
+                <a class="btn btn-primary"type="button"  href=/advertisement/job-application/{{job.id}}>Apply</a>
+            {%else%}
+                <a class="btn" type="button"  disabled>This Job is {{job.Status}}</a>
+            {%endif%}
+        {%endif%}
+        {%endif%}
+    </p>
+      
+    <h1 class="display-4 text-center">
+ 
+          {{job.Job_type|title}}
+
+    </h1>
+    <p class="lead text-center">
+      <i class="fa fa-map-marker" >  
+        {% if location %}
+        {{location.Line1}},
+        {%if location.Line2 %}
+            {{location.Line2}},
+        {%endif%}
+         {{location.City}}, {{location.State}}, {{location.Country}}, {{location.Zipcode}}
+        {%endif%}
+    </i> 
+    </p>
+    <p class="lead text-center">
+      <strong>Posted by :</strong>
+      
+        <a href="/account/profile/{{job.Customer.username}}-{{job.Customer.id}}">{{job.Customer.username}}</a> 
+ 
+    </p>
+    
+    </div>
+    </div>
+    <div class ="about ms-sm-auto  px-md-4 ">
+      <p>
+        <strong>Event Date & Time :</strong>
+        
+        {{job.Date}} on {{job.Time}}
+   
+      </p>
+
+      <p>
+        <strong>Job Description :</strong>
+ 
+        {{job.Description}}
+   
+      </p>
+
+      <p>
+        <strong>Budget :</strong>
+        
+        {{job.Amount}} {{job.Currency}}
+   
+      </p>
+      <p>
+        <strong>Technician preference :</strong>
+        
+        {{job.Technician_experience_preference}}
+   
+      </p>
+      <p>
+        <strong>Licence :</strong>
+        
+       
+        {% if job.Licence %}
+        yes
+        {%else%}
+        No
+        {%endif%}
+   
+      </p>
+    </div>
+    <div class=" p-1 m-3" id ="Apply">
+      <h1 class=" p-0 m-0 text-center">
+       
+      </h1>
+      </div>
+  
+  {%endblock%}

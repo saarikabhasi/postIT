@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block head %}
+{% load crispy_forms_tags %}
+{%endblock%}
+{% block body %}    
+
+<div class="container notification">
+    <div class="row">
+        <main class="col-md-9  col-lg-10 px-md-4 "> 
+            {%for notification in notifications%}
+            <div class="container pt-5 mt-5 rounded  " id="notification-{{notification.id}}">
+    
+                {% if notification.Message %}
+                    <div id="headline" class="p-0 m-0 ">
+                        <h1 id="title"> 
+                    
+                            {{notification.Message|title}}
+                                <span id ="title-job"> 
+                                    {% if notification.Appointment %}
+                                    <a href ="{% url 'advertisement:appointment' id=notification.Appointment.Job.id %}">click here</a>
+                                    {%endif%}
+                                </span>
+                    
+                        </h1>
+                    </div>
+            
+                {%endif%}
+            </div>
+            {%empty%}
+            <div id="headline" class="card-title p-0 m-0 ">
+                <p class=" text-center text-info"> You have no notifications</p>
+            </div>
+                {%endfor%}
+            
+           
+        </main>
+    </div>
+</div>
+
+
+{%endblock%}

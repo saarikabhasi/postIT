@@ -1,0 +1,22 @@
+
+<!-- <input type="text" id ="input" ></input>
+<input type="text" id ="output"></input>
+
+<script>
+    const input = document.querySelector("#input")
+    const output = document.querySelector("#output")
+    input.addEventListener('onkeypress',updateoutput);
+    function updateoutput(e){
+        output.value = e.target.value
+    }
+</script> -->
+<script>
+    function showCurrentValue(event)
+{
+    const value = event.target.value;
+    document.getElementById("label").innerText = value;
+}
+</script>
+
+<input type="text" onInput="showCurrentValue(event)"><br>
+The text box contains: <span id="label"></span>

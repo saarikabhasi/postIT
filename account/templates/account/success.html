@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block body %}
+<div class="success">
+    <h5> Thank you for confirming your email. 
+        {% if user.is_authenticated %}
+        
+        <span> 
+            You have successfuly logged in to your account! <br> To begin with, Check out the ads posted by users in 
+            <a class="text-monospace" id = "" href="{% url 'advertisement:index' %}">here</a>
+        </span>
+        {%else%}
+        <span>
+            <a href="{% url 'account:login' %}" class = "btn-link" id="createaccount">Log In here.</a> 
+        </span>
+        {%endif%}
+    </h5>
+</div>
+
+{% endblock %}

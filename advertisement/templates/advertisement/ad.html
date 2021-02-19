@@ -1,0 +1,197 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Posts
+{% endblock %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+
+
+<script>
+
+    var initialcategory = "{{initialcategory}}"
+
+       if (initialcategory == ""){
+        initialcategory = localStorage.getItem('previoussection')
+        
+    }
+
+</script>
+
+
+{%endblock%}
+{% block body %}
+
+<div id="index" class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 col-xl-2 d-flex left d-md-block    bd-highlight  sidebar"  id = "mini-nav">
+        <!-- <nav class = "navbar col-md-3 col-lg-2 navbar-expand-lg navbar-light d-flex bd-highlight d-md-block  sidebar collapse" id = "mini-nav"> -->
+            <div class="position-sticky pt-3">
+                <div class="col-xs-12 ">
+                    {%if request.user.is_customer == True %}
+                    <ul class="navbar-nav flex-column">
+                    
+                        <li class="nav-item">
+                        
+                            <a class="btn btn-link active" id="button" data-section="new-job">Post a new job</a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <ul class="navbar-nav flex-column">
+                        <li class="nav-item">
+                            <a class="btn btn-link" id="button"  data-section="ads">Ads</a>
+
+                        </li>
+                    </ul>
+                    <hr>
+                    
+                    {%endif%}
+                    <ul class="navbar-nav flex-column ">
+                        <li class="nav-item">
+                            <a class="btn btn-link" id="button"  data-section="appointments">Appointments</a>
+
+                        </li>
+                    </ul>
+                    <hr>
+                    
+                
+                    <ul class="navbar-nav flex-column ">
+                        <li class="nav-item">
+                    
+                            <button class="btn btn-link" id="button" data-section="reviews">Reviews</button>
+                        </li>
+                    </ul>
+                    <hr> 
+           
+
+         
+                    <ul class="navbar-nav flex-column ">
+                        <li class="nav-item">
+                            <button class="btn btn-link" id="button"  data-section="given_reviews">Given Reviews</button>
+
+                        </li>
+                    </ul> 
+                   
+                </div>
+            </div>
+        <!-- </nav> -->
+      
+        </div>
+          
+        <div class="col-md-9 col-xl-10 right mx-md-auto">
+        <main class=" px-md-4 ">  
+           
+                
+                <div id ="new-job-form" class="d-none">
+                   
+                
+                        {%if Jobform %}
+                            <form method="post" action="{% url 'advertisement:user_account' username=user.username|slugify  %}" id="newjob">
+                                {% csrf_token %}
+                                <div class="form-row">
+                                    <div class="form-group col-md-12 mb-0">
+                                    {{Jobform.Job_type|as_crispy_field }}
+                                    </div>
+                                    <div class="form-group col-md-12 mb-0">
+                                    {{Jobform.Description|as_crispy_field }}
+                                    </div>
+                                </div>
+            
+                                <div class="form-row">
+                                
+                                    <div class="form-group col-md-6 mb-0">
+                                    {{Jobform.Date|as_crispy_field }}
+                                    </div>
+                                    <div class="form-group col-md-6 mb-0">
+                                    {{Jobform.Time|as_crispy_field }}
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12 mb-0">
+                                        {{Jobform.Priority|as_crispy_field }}
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                <div class="form-group col-md-6 mb-0">
+                                    {{Jobform.Amount|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-6 mb-0">
+                                    {{Jobform.Currency|as_crispy_field }}
+                                </div>    
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 mb-0">
+                                        {{Jobform.Technician_experience_preference|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6 mb-0">
+                                        {{Jobform.Licence|as_crispy_field }}
+                                        
+                                    </div>
+                                </div>
+                                
+                                
+                                
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 mb-0">
+                                
+                                        <label for="location">Choose a Location</label>
+                                        <input type ="text" name ="display_location" id= "display_location" class = "form-control new_job_form_components " placeholder="Select a Location from below" disabled>
+                                    </div>
+                                    <div class=" form-group col-md-6 mb-0">
+                                        {{Jobform.Location}}
+
+                                    </div>
+                                </div>
+                                
+            
+            
+                                <div class="form-row">
+                                <div class="form-group col-md-12" >          
+                                    <fieldset class="role" > 
+                
+                                    <label for="role">Choose a Address</label>
+                                        <div class="flex-container">
+                                            <input type="radio" name="role" value="current_address" required=True data-toggle="collapse" data-target="#current_address" aria-expanded="false" aria-controls="current_address" onclick="show_address(this)">
+                                            <label for="customer">Current Address</label><br>
+                        
+                                            <input type="radio"  name="role" value="another_address" required=True data-toggle="collapse" data-target="#add_address" aria-expanded="false" aria-controls="add_address" onclick="show_address(this)">
+                                            <label for="technician">Another Address</label><br>
+                                        </div>
+                                        
+                                    </fieldset>
+                                </div>  
+                                </div>
+                                
+                                
+                                
+                            </form>  
+                            <div class="form-row flex-main " id = "display_address" style="">
+                                {%if AddressForm %}
+                                {{AddressForm}}
+                                {%endif%}
+                            </div>
+                            <div class="form-row" id="show-address-form">
+                                
+                            </div>
+                            <button type="submit" class="btn btn-primary" form="newjob">Submit</button>         
+                        {%endif%}
+                   
+                </div>
+
+             
+                <div id="display" class="">
+                </div>
+        </main>
+    </div>
+    </div>
+</div>
+
+<script type ="text/javascript" src="{% static 'google.js' %}"></script>
+<script type ="text/javascript" src="{% static 'util.js' %}"></script>
+<script type ="text/javascript" src="{% static 'function.js' %}"></script>
+<script type ="text/javascript" src="{% static 'ad.js' %}"></script>
+<script type ="text/javascript" src="{% static 'index.js' %}"></script>   
+
+{%endblock%}

@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+{% block head %}
+{% load static %}
+<script type ="text/javascript" src="{% static 'authenticate.js' %}"></script>
+{% endblock %}
+{% block body %}
+
+
+
+<div class = "card" id = "signIn">
+    <fieldset>
+        <legend class="card-body"> 
+            <h2 class="card-title">
+                <a class="navbar-brand text-monospace text-center" id = "logo">PostIT</a>
+                <hr>
+                <div>
+
+                        Already have an account? 
+
+                    <span>
+                        <a href="{% url 'account:login' %}" class = "btn-link" id="createaccount">Log In here.</a> 
+                    </span>
+                </div>
+            </h2>
+        </legend>
+    </fieldset>
+
+    <fieldset class="card-body">
+        <legend >
+            <h2 class="card-title">Sign In </h2>
+        
+            <form action="{% url 'account:register' %}" method="post" class = "card-body">
+                {% csrf_token %} 
+                {% if message %}
+                    <p class="text-danger lead">{{ message }}</p>
+                {% endif %}
+                <div class = "form-group ">
+           
+                    <fieldset>
+                        <legend><h3>Enter your username</h3>
+                            
+                            <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+                        </legend>
+                    </fieldset>
+                </div>
+                <div class="form-group"> 
+                    <!-- email address -->
+                    <fieldset>
+
+                        <legend><h3>Enter your email address</h3>
+                            <input class="form-control" type="email" name="email" placeholder="Email Address">
+                        </legend>
+                    </fieldset>
+                </div>
+                <div class="form-group">          
+                    <fieldset>
+                        <!-- password -->
+                        <legend><h3>Enter your password</h3>
+                            <input class="form-control" id ="password1" onInput ="validatepassword(password1)" type="password" name="password" placeholder="Password">
+                            <input type="checkbox" onInput="showCurrentValue(password1)"> <label for="show">show password</label><br>
+
+                        </legend>
+                    </fieldset>
+                </div>
+                <div class="form-group">          
+                    <fieldset>
+                        <!-- confirm password -->
+                        <legend><h3>confirm password</h3>
+                            <input class="form-control" onInput ="validatepassword(password2)" id ="password2" type="password" name="confirmation" placeholder="Confirm Password">
+                            <input type="checkbox" onInput="showCurrentValue(password2)"> <label for="show">show password</label><br>
+                        </legend>
+                    </fieldset>
+                </div>
+                <div class="form-group" id="validators">
+                    <p id="UserAttributeSimilarityValidator" class="text-danger">Password should be different from your Email id or Username.</p>
+                    <p id="MinimumLengthValidator" class="text-danger">Password has minimum length 8.</p>
+                    <p id="NumericPasswordValidator" class="text-danger" >Password contains combination of letters, numbers and special characters.</p>
+                    <p id="NumberValidator" class="text-danger">Password must contains minimum 3 digits.</p>
+                    <p id="confirmValidator" class="text-danger">Password and confirm password must match.</p>
+                </div>
+                <div class="form-group">          
+                    <fieldset class="role">
+                    <label for="role">Choose a role:</label>
+                    <div class="flex-container">
+                        
+                        <input type="radio" id="is_customer" name="role" value="is_customer" >
+                        <label for="customer">Customer</label><br>
+
+                        <input type="radio" id="is_technician" name="role" value="is_technician">
+                        <label for="technician">Technician</label><br>
+                    </div>
+                    </fieldset>
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit"  value="submit">
+                    
+                
+                </div>
+
+            </form>
+        </legend> 
+    </fieldset>
+</div>
+{% endblock %}

@@ -1,0 +1,182 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %} PostIT {% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'account/style.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+        <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script> 
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        {% block head %}
+       {% endblock %}
+
+
+        
+</head>
+
+    <script>
+        //get loggin user details , useful for certain client side operation
+        const user_id = "{{request.user.id}}"
+        const user_username = "{{request.user.username}}"
+        const user_email = "{{request.user.email}}"
+        
+        
+        //user role
+        let is_customer = false
+        let is_technician = false
+        let role = 0 
+
+        if ("{{request.user.is_customer}}" == "True"){
+            is_customer = true
+
+        }
+        if ("{{request.user.is_technician}}" == "True"){
+           is_technician = true
+    
+        }
+
+        if (is_customer){
+            role = "Customer"
+        }
+        else{
+            role = "Technician"
+        }
+        const user_role = role
+
+        //notifications count
+        let unread_notification_count = 0
+
+        if ("{{not_checked_notifications_count}}"){
+            unread_notification_count="{{not_checked_notifications_count}}"
+        }
+        const notification_count = unread_notification_count
+        
+        //discussions count
+        let unread_discussion_count = 0
+       
+        if ("{{not_checked_discussions_count}}"){
+            unread_discussion_count="{{not_checked_discussions_count}}"
+        }
+        const discussion_count = unread_discussion_count
+        
+        //form csrftoken
+        var csrfToken = "{{csrf_token}}"
+        
+        //Google key
+        let unread_google_key = ""
+      
+        if ("{{google_key}}"){
+            unread_google_key="{{google_key}}"
+        }
+        const google_key = unread_google_key
+
+
+    </script>
+
+
+    <body>
+
+        
+        <nav class="navbar navbar-dropdown navbar-fixed-top  navbar-expand-lg navbar-light flex-row d-flex bd-highlight mb-3" id="main-nav">
+            <a class="navbar-brand text-monospace" id = "logo" href="{% url 'advertisement:index' %}">PostIT</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main" aria-controls="main" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            <div class="collapse navbar-collapse" id="main">
+              <ul class="navbar-nav mr-auto">
+                {% if user.is_authenticated %}
+                    
+                    <li class="nav-item active">
+ 
+                        <a class="nav-link" href="{% url 'advertisement:user_account' username=user.username|slugify  %}"><strong>{{ user.username |title}}</strong>
+                            <span class="sr-only">(current)</span></a>
+                 
+         
+                    </li>
+                    <li class="nav-item">
+ 
+                        <a class="nav-link" href="{% url 'account:account' %}">
+                            <strong>Setting</strong>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+ 
+                        <a class="nav-link " id="discussion"  href="{% url 'account:discussion' %}">
+                            <span >
+                                <strong>Discussion</strong>
+                            </span> 
+                        </a>
+                    </li>
+                
+                    <li class="nav-item">
+ 
+                        <a class="nav-link " id="notification"  href="{% url 'account:notification' %}">
+                            <span >
+                                <strong  class="fa fa-bell"></strong>
+                            </span> 
+                        </a>
+                    </li>
+                
+  
+               
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account:logout' %}">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account:login' %}">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account:register' %}">Register</a>
+                    </li>
+                {% endif %}
+              </ul>
+            </div>
+          </nav>
+         
+        <div class="body">
+            
+
+            {% block body %}
+            {% endblock %}
+            
+        </div>
+
+    </body>
+
+
+   <script>
+    //Add counts to navigation 
+    if (notification_count!=0){
+        
+        document.getElementById("notification").innerHTML+='<span class="badge badge-notifications">'+notification_count+'</span>'
+    }
+
+    if (discussion_count!=0){
+
+
+        document.getElementById("discussion").innerHTML+='<span class="badge badge-notifications">'+discussion_count+'</span>'
+    }
+
+
+
+
+  </script>
+  
+      <footer id ="footer" class="mx-auto ">
+      
+        <small class=" text-monospace"> &#169; Created by Saarika </small>
+   </footer>
+</html>
+

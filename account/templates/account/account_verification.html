@@ -1,0 +1,7 @@
+{% autoescape off %}
+Hi {{ user.username }},
+Welcome to postIT! 
+To begin posting a job/ad, please confirm your email address first. 
+Please click on the one time link below to confirm your registration,
+http://{{ domain }}{% url 'account:activate' uidb64=uid token=token %}
+{% endautoescape %}
