@@ -1,7 +1,7 @@
 # postIT
 
 
-Youtube: - [![postIT](https://img.youtube.com/vi/joHAiOwrOzw/0.jpg)](https://www.youtube.com/watch?v=joHAiOwrOzw)
+[![postIT](https://img.youtube.com/vi/joHAiOwrOzw/0.jpg)](https://www.youtube.com/watch?v=joHAiOwrOzw)
 
 # Description
 
