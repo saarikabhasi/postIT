@@ -2,6 +2,7 @@
 
 
 ![postIT](posit-form.gif)
+![postIT](posit-appointment.gif)
 
 # Description
 
