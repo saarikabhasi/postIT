@@ -86,8 +86,8 @@ There are two types of users: **Customer and Technician**.
 
 
 # Additional information:
-   1. This application uses google api - Maps JavaScript API and Places API. 
-   For more information - https://developers.google.com/maps/documentation/javascript/places-autocomplete
+This application uses google api - Maps JavaScript API and Places API.
+For more information - https://developers.google.com/maps/documentation/javascript/places-autocomplete
   
 
 # Author
