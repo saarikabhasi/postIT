@@ -1,7 +1,7 @@
 # postIT
 
 
-[![postIT](posit-form.gif)]
+![postIT](posit-form.gif)
 
 # Description
 
