@@ -92,7 +92,7 @@ For more information - https://developers.google.com/maps/documentation/javascri
   
 
 # Author
-NAIR SAARIKA BHASI
+saarikabhasi
          
    
       
