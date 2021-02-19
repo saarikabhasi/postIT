@@ -90,8 +90,7 @@ There are two types of users: **Customer and Technician**.
    For more information - https://developers.google.com/maps/documentation/javascript/places-autocomplete
   
 
-# Author:
-------------
+# Author
 NAIR SAARIKA BHASI
          
    
