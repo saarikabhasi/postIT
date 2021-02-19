@@ -1,7 +1,7 @@
 # postIT
 
 
-[![postIT](posit-form.gif)](https://www.youtube.com/watch?v=joHAiOwrOzw)
+[![postIT](posit-form.gif)]
 
 # Description
 
